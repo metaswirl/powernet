@@ -27,16 +27,17 @@ def getOpenCalaisResultFromURL(url):
     return result
 
 def getFacts(url):
-    url_facts = {}
-    print "start thread"
-    url_facts[url] = []
+    url_facts_exacts = {}
+    url_facts_exacts[url] = [[],[]]
     openCalaisResult = getOpenCalaisResultFromURL(url)
     if openCalaisResult != None:
 #         if hasattr(openCalaisResult,"entities"):
 #             url_facts[url]+=(Stage_2a_JsonToFact.openCalaisJsonToFacts(openCalaisResult.entities,"entities"))
         if hasattr(openCalaisResult,"relations"):
-            url_facts[url]+=(Stage_2a_JsonToFact.openCalaisJsonToFacts(openCalaisResult.relations,"relations"))
-    return url_facts
+            facts,exacts = Stage_2a_JsonToFact.openCalaisJsonToFacts(openCalaisResult.relations,"relations")
+            url_facts_exacts[url][0]+=facts
+            url_facts_exacts[url][1]+=exacts
+    return url_facts_exacts
 
 def processURLs(urls):
     
