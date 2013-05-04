@@ -11,7 +11,9 @@ def openCalaisJsonToFacts(jsonObject,typeGroup):
     facts = []
     for relation in jsonObject:
 #             print relation['_type']
-        currentAttribute = Fact.Fact(relation['_type'],typeGroup)
+        currentAttribute = Fact.Fact()
+        currentAttribute.add('type',relation['_type'])
+        currentAttribute.add('typeGroup',typeGroup)
         for k,v in relation.items():
             if not k.startswith("_"):
                 if isinstance(v, unicode):
