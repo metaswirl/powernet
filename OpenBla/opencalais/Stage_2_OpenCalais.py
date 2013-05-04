@@ -5,8 +5,8 @@ Created on 04.05.2013
 '''
 
 from calais import Calais
-import JsonToPostreSQL
-import DBJobs
+import Stage_2a_JsonToFact
+import DBjobs
 
 openCalaisKeys = ["944599rdxsxdcrx27u8qkygj","3tva2pe9esxmts2mscuth8dy","m5wmy4dbwpy65h28hnnesckh",
                   "hf2mgf54btc7htkgn2bep9th","gth235ahv4jv686juf5s7bmy","e37bka7n5wmjyufh2hfuvnm6",
@@ -22,10 +22,12 @@ def getOpenCalaisResultFromURL(url):
 
 
 def processURLs(urls):
+    url_facts =[]
     for url in urls:
         openCalaisResult = getOpenCalaisResultFromURL(url)
-        facts = JsonToPostreSQL.openCalaisJsonToFacts(openCalaisResult.entities,"entities")
-        facts += JsonToPostreSQL.openCalaisJsonToFacts(openCalaisResult.relations,"relations")
+        url_facts += (url,Stage_2a_JsonToFact.openCalaisJsonToFacts(openCalaisResult.entities,"entities"))
+        url_facts += (url,Stage_2a_JsonToFact.openCalaisJsonToFacts(openCalaisResult.relations,"relations"))
+    return url_facts
 #         DBJobs.processURLandFacts((url,facts))
 
 
@@ -35,6 +37,6 @@ if __name__ == '__main__':
     openCalaisResult = getOpenCalaisResultFromURL(url)
     simpleResult = openCalaisResult.raw_response
     openCalaisResult.print_relations()
-    JsonToPostreSQL.openCalaisJsonToPostgreSQL(openCalaisResult.entities,"relations")
+    Stage_3_JsonToFact.openCalaisJsonToPostgreSQL(openCalaisResult.entities,"relations")
 #     JsonToPostreSQL.openCalaisJsonToPostgreSQL(openCalaisResult.entities,"entities")
 #     print getOpenCalaisResultFromURL("http://www.csmonitor.com/World/Asia-Pacific/2013/0502/All-eyes-on-Kim-Jong-un-after-North-Korea-gives-15-years-hard-labor-to-US-citizen")

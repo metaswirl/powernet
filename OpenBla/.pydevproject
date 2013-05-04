@@ -5,4 +5,7 @@
 </pydev_pathproperty>
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python 2.7</pydev_property>
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">Default</pydev_property>
+<pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
+<path>C:\Users\Peter\Desktop\kennethreitz-requests-v1.2.0-86-ge585e49\kennethreitz-requests-e585e49\build\lib\requests</path>
+</pydev_pathproperty>
 </pydev_project>

@@ -1,4 +1,5 @@
 import requests
+
 API_KEY = "dhSMYpE5d052v7FgnBSs8ecKqYFuDINwHCicvstMP8g"
 URL1 = "https://api.datamarket.azure.com/Data.ashx/Bing/SearchWeb/Web?Query=%27"
 URL2 = "%27&$top=50&$format=json"
@@ -12,4 +13,8 @@ def geturls(query):
 
 
 def processQueries(queries):
-    pass
+    query_urls_pairs = []
+    for query in queries:
+        urls = geturls(query)
+        query_urls_pairs.append((query,urls))
+    return query_urls_pairs
