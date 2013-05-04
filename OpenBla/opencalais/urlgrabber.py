@@ -9,3 +9,7 @@ def geturls(query):
     for url in r.json()["d"]["results"]:
         urls.append(url["Url"])
     return urls
+
+
+def processQueries(queries):
+    pass
