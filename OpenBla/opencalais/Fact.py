@@ -8,8 +8,8 @@ import json
 
 class Fact(object):
     
-    def __init__(self,factType,factTypeGroup):
-        self.pairs = {'type' : factType,'typeGroup' : factTypeGroup}
+    def __init__(self):
+        self.pairs = {}
         self.other_keys = []
     
     def add(self,key,value):

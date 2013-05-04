@@ -7,6 +7,9 @@ Created on 04.05.2013
 from calais import Calais
 import Stage_2a_JsonToFact
 import json
+import threading
+import time
+from multiprocessing import Pool
 
 openCalaisKeys = ["944599rdxsxdcrx27u8qkygj","3tva2pe9esxmts2mscuth8dy","m5wmy4dbwpy65h28hnnesckh",
                   "hf2mgf54btc7htkgn2bep9th","gth235ahv4jv686juf5s7bmy","e37bka7n5wmjyufh2hfuvnm6",
@@ -23,29 +26,30 @@ def getOpenCalaisResultFromURL(url):
         result = None
     return result
 
+def getFacts(url):
+    url_facts = {}
+    print "start thread"
+    url_facts[url] = []
+    openCalaisResult = getOpenCalaisResultFromURL(url)
+    if openCalaisResult != None:
+#         if hasattr(openCalaisResult,"entities"):
+#             url_facts[url]+=(Stage_2a_JsonToFact.openCalaisJsonToFacts(openCalaisResult.entities,"entities"))
+        if hasattr(openCalaisResult,"relations"):
+            url_facts[url]+=(Stage_2a_JsonToFact.openCalaisJsonToFacts(openCalaisResult.relations,"relations"))
+    return url_facts
 
 def processURLs(urls):
-    print "got %d urls for openCalais.." %(len(urls))
-    url_facts ={}
-    for url in urls:
-        url_facts[url] = []
-        print "."
-        openCalaisResult = getOpenCalaisResultFromURL(url)
-        if openCalaisResult != None:
-            if hasattr(openCalaisResult,"entities"):
-                url_facts[url]+=(Stage_2a_JsonToFact.openCalaisJsonToFacts(openCalaisResult.entities,"entities"))
-            if hasattr(openCalaisResult,"relations"):
-                url_facts[url]+=(Stage_2a_JsonToFact.openCalaisJsonToFacts(openCalaisResult.relations,"relations"))
-    return url_facts
-#         DBJobs.processURLandFacts((url,facts))
-
-
-if __name__ == '__main__':
-    url = "http://www.csmonitor.com/World/Asia-Pacific/2013/0502/All-eyes-on-Kim-Jong-un-after-North-Korea-gives-15-years-hard-labor-to-US-citizen"
     
-    openCalaisResult = getOpenCalaisResultFromURL(url)
-    simpleResult = openCalaisResult.raw_response
-    openCalaisResult.print_relations()
-    Stage_2a_JsonToFact.openCalaisJsonToPostgreSQL(openCalaisResult.entities,"relations")
-#     JsonToPostreSQL.openCalaisJsonToPostgreSQL(openCalaisResult.entities,"entities")
-#     print getOpenCalaisResultFromURL("http://www.csmonitor.com/World/Asia-Pacific/2013/0502/All-eyes-on-Kim-Jong-un-after-North-Korea-gives-15-years-hard-labor-to-US-citizen")
+    print "got %d urls for openCalais.." %(len(urls))
+    
+    pool = Pool(6)
+    fact_dicts = pool.map(getFacts,urls)
+    pool.terminate()
+
+    pool.join()
+    url_facts = {}
+    for a_dict in fact_dicts:
+        url_facts.update(a_dict)
+    
+    return url_facts
+

@@ -11,7 +11,7 @@ import Fact
 
 
 def getFocusQueries(focus):
-    return ["Microsoft hires","Microsoft fires"]
+    return ["Kim Jong Un","North Korea leader", "Kim Jong USA"]
 
 
 
@@ -38,12 +38,23 @@ def process(focus):
         fmeasures = url_fmeasures[url]
         url_scores[url] = sum(fmeasures)
     print url_scores
+    type_count={}
     for url in url_facts_big.keys():
         facts = url_facts_big[url]
         for fact in facts:
             print fact.toJson()
+            atype = fact.pairs['type']
+            if type_count.has_key(atype):
+                type_count[atype]+=1
+            else:
+                type_count[atype]=0
+    for one_type in type_count.keys():
+        if type_count[one_type] > 20:
+            print str(one_type) + ":" + str(type_count[one_type])
+        
 if __name__ == '__main__':
-    fact = Fact.Fact("PersonCareer","relations")
+    fact = Fact.Fact()
+    fact.add('typeGroup', 'relations')
     print fact
     process(fact)
             
