@@ -1,0 +1,17 @@
+body 
+{
+margin:auto;
+background-image:url('!!!powernet.jpg');
+background-color:#cccccc;
+text-align:center;
+}
+img
+{
+opacity:0.4;
+}
+
+.inputtext
+{
+width: 400px;
+
+}
