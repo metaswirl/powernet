@@ -1,0 +1,20 @@
+{
+  "nodes":[
+    {"name":"Kim Yong Un","group":1},
+    {"name":"Kim A","group":1},
+    {"name":"Kim B","group":1},
+    {"name":"Kim C","group":1},
+    {"name":"Kim D","group":1},
+    {"name":"KIM E","group":1},
+    {"name":"KIM F","group":1},
+    {"name":"KIM G","group":1},
+    {"name":"KIM H","group":1},
+    {"name":"KIM I","group":1},
+    {"name":"KIM J","group":2},
+    {"name":"KIM K","group":2},
+    {"name":"KIM L","group":3}
+  ],
+  "links":[
+
+  ]
+}
