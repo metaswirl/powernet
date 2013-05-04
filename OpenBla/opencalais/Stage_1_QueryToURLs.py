@@ -2,7 +2,7 @@ import requests
 
 API_KEY = "dhSMYpE5d052v7FgnBSs8ecKqYFuDINwHCicvstMP8g"
 URL1 = "https://api.datamarket.azure.com/Data.ashx/Bing/SearchWeb/Web?Query=%27"
-URL2 = "%27&$top=50&$format=json"
+URL2 = "%27&$top=30&Market=%27en-US%27&$format=json"
 
 def geturls(query):
     urls=[]
