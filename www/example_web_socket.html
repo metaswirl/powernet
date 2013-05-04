@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+<title>WebSockets Hello World</title>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+    var ws;
+    // TODO: instead of localhost = window.location.hostname
+    ws = new WebSocket("ws://localhost:8080/ws");
+    ws.onmessage = function(evt) {
+
+    // TODO: extract JSON from event.data
+    alert("message received: " + event.data)};
+</script>
+</head>
+
+<body>
+    <h1>WebSockets Hello World</h1>
+</body>
+</html>
