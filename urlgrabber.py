@@ -1,5 +1,5 @@
 import requests
-API_KEY = "CX0caiCq6wdY33dBrTu7lWx3YgfD9Ff0SX9f5RjDKcM"
+API_KEY = "dhSMYpE5d052v7FgnBSs8ecKqYFuDINwHCicvstMP8g"
 URL1 = "https://api.datamarket.azure.com/Data.ashx/Bing/SearchWeb/Web?Query=%27"
 URL2 = "%27&$top=50&$format=json"
 
