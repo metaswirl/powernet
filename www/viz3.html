@@ -110,7 +110,7 @@ document.getElementById('teco').innerHTML="<img src=\"template/img/logo.png\" st
     ws.onmessage = function(evt) {
 
 
-d3.json("fifth_dump", function(json) {
+d3.json(event.data, function(json) {
   force
       .nodes(json.nodes)
       .links(json.links)
