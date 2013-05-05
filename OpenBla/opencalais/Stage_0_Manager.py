@@ -87,7 +87,7 @@ def process(focus):
         topURLs = sorted(all_scored_urls,key=lambda url:url_scores[url])[0:2]
         allIncidents = []
         for url in topURLs:
-            if url_incidents.haskey(url):
+            if url_incidents.has_key(url):
                 incidents = url_incidents[url]
                 allIncidents+=incidents
                 if len(allIncidents) > 10:
