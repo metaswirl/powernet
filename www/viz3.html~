@@ -96,10 +96,10 @@ function giveIcon(d){
 	if (d.group==1){
 		return "/template/img/littleMan.ico";
 	}
-if (d.group==2){
+if (d.group==1){
 		return "/template/img/littleIndustry.ico";
 	}
-if (d.group==3){
+if (d.group==1){
 		return "/template/img/littleGlobe.ico";
 	}
 	return "/template/img/littleMan.ico";

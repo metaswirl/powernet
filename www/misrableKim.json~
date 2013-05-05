@@ -1,6 +1,6 @@
 {
   "nodes":[
-    {"name":"Kim Yong Un","group":1,"text":"hello World!"},
+    {"name":"Kim Yong Un","group":1},
     {"name":"Kim A","group":1},
     {"name":"Kim B","group":1},
     {"name":"Kim C","group":1},
