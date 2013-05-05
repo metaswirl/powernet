@@ -33,8 +33,6 @@ class MyWebSocketHandler(websocket.WebSocketHandler):
 
 class MyRequestHandler(web.RequestHandler):
     def get(self):
-        # TODO: send to pipeline self.get_argument('query'))
-        print self.get_argument('query')
         self.render("www/viz3.html")
 
 class ParseFacts(object):
