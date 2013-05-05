@@ -109,8 +109,8 @@ document.getElementById('teco').innerHTML="<img src=\"template/img/logo.png\" st
     ws = new WebSocket("ws://localhost:8080/ws");
     ws.onmessage = function(evt) {
 
-
-d3.json(event.data, function(json) {
+var json=event.data;
+//d3.json(event.data, function(json) {
   force
       .nodes(json.nodes)
       .links(json.links)
@@ -162,7 +162,7 @@ node.on("click",function(d){renderDiv(d);});
 
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
   });
-});
+//});
 
 };
 
