@@ -6,9 +6,9 @@ class SQLAccess:
     def __init__(self):
         try:
             self.conn = psycopg2.connect("dbname=PowerWeb user=postgres host=ec2-54-242-169-196.compute-1.amazonaws.com password=keineAhnung!")
+            self.cur = self.conn.cursor()
         except:
             print "Cant connect to database."
-        self.cur = self.conn.cursor()
         
 
     def close(self):
@@ -25,9 +25,6 @@ class SQLAccess:
             for key in element[1]:
                 if "name" in key and text in element[2][element[1].index(key)]:
                     fact_list.append(self.makedict(element[1], element[2]))
-        if len(fact_list)==0:
-            pass
-            #fact_list+="hier wird peter aufgerufen"
         return fact_list
 
     def makedict(self, keys, values):
