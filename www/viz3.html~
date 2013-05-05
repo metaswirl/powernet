@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<link rel="shortcut icon" href="img/littleMan.ico"/>
+  <meta name="viewport" content="width=device-width" />
+  <title>PowerWeb</title>
+
+  <link rel="stylesheet" href="css/normalize.css" />
+  
+  <link rel="stylesheet" href="css/foundation.css" />
+  
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:700' rel='stylesheet' type='text/css'>
+
+  <script src="js/vendor/custom.modernizr.js"></script>
+<script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
+<style>
+
+.link {
+  stroke: #ccc;
+}
+table{
+margin:auto;
+
+}
+.node text {
+  pointer-events: none;
+  font: 10px sans-serif;
+}
+
+div.textcontent{
+float:right;
+width: 350px;
+height:500px;
+background-color: white;
+padding-top:50 px;
+text-align:center;
+line-height:250%;
+}
+body
+{
+margin-top:50px;
+}
+
+</style>
+<body>
+<script>
+
+function renderDiv(d){
+	 deleteDiv();
+
+	 var mydiv = d3.select("body").append("div")
+      	.attr("class", "textcontent")
+	.attr("id","teco");
+
+	document.getElementById('teco').innerHTML="<img src=\"template/img/logo.png\" style=\"width:300px\">";
+
+	document.getElementById('teco').innerHTML="<img src=\"template/img/logo.png\" style=\"width:300px\"></br></br>"+d.name+"</br></br>"+d.text;
+        console.log(d);
+	console.log(d.text);
+}
+function giveIcon(d){
+	if (d.group==1){
+		return "/template/img/littleMan.ico";
+	}
+if (d.group==2){
+		return "/template/img/littleIndustry.ico";
+	}
+if (d.group==3){
+		return "/template/img/littleGlobe.ico";
+	}
+	return "/template/img/littleMan.ico";
+}
+
+
+function deleteDiv(d){
+	d3.select(".textcontent").remove();
+}
+ function renderBar(){
+	d3.select("body").append("div")
+	.attr("id","hi");
+
+	document.getElementById('hi').innerHTML="";
+}
+
+
+var width = 800,
+    height = 500
+
+var svg = d3.select("body").append("svg:svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var force = d3.layout.force()
+    .gravity(.05)
+    .distance(170)
+    .charge(-170)
+    .size([width, height]);
+
+d3.select("body").append("div")
+      	.attr("class", "textcontent")
+	.attr("id","teco");
+
+document.getElementById('teco').innerHTML="<img src=\"template/img/logo.png\" style=\"width:300px\">";
+
+
+
+   var ws;
+    // TODO: instead of localhost = window.location.hostname
+    ws = new WebSocket("ws://localhost:8080/ws");
+    ws.onmessage = function(evt) {
+
+
+d3.json("fifth_dump", function(json) {
+  force
+      .nodes(json.nodes)
+      .links(json.links)
+      .start();
+
+  var link = svg.selectAll(".link")
+      .data(json.links)
+      .enter().append("line")
+      .attr("class", "link");
+
+  var node = svg.selectAll(".node")
+      .data(json.nodes)
+      .enter().append("g")
+      .attr("class", "node")
+      .call(force.drag);
+
+  node.append("image")
+      .attr("xlink:href", function(d){return giveIcon(d);})
+      .attr("x", -8)
+      .attr("y", -4)
+      .attr("width", 25)
+      .attr("height", 25);
+
+
+
+ svg.select(".node").append("image")
+      .attr("xlink:href", "/template/img/littleManWithRedTie.ico")
+      .attr("x", -8)
+      .attr("y", -15)
+      .attr("width", 40)
+      .attr("height", 40);
+
+node.on("click",function(d){renderDiv(d);});
+
+
+
+ 
+
+  node.append("text")
+      .attr("text-anchor", "middle")
+      .attr("dy", 35)
+      .text(function(d) { return d.name });
+
+  force.on("tick", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  });
+});
+
+};
+
+</script>
+

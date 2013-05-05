@@ -7,11 +7,6 @@
   stroke-width: 1.5px;
 }
 
-.node text {
-  pointer-events: none;
-  font: 10px sans-serif;
-}
-
 .link {
   stroke: #999;
   stroke-opacity: .6;
@@ -44,19 +39,19 @@ d3.json("misrableKim.json", function(error, graph) {
 
   var link = svg.selectAll(".link")
       .data(graph.links)
-      .enter().append("line")
+    .enter().append("line")
       .attr("class", "link")
       .style("stroke-width", function(d) { return Math.sqrt(d.value); });
 
   var node = svg.selectAll(".node")
       .data(graph.nodes)
-      .enter().append("circle")
+    .enter().append("circle")
       .attr("class", "node")
       .attr("r", 10)
       .style("fill", function(d) { return color(d.group); })
       .call(force.drag);
 
-      node.append("title")
+  node.append("title")
       .text(function(d) { return d.name; });
 
   force.on("tick", function() {

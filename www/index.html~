@@ -16,13 +16,8 @@
  <script>
 function commitSearch(){
 	var foo = $("[name='foo']").val();
-	var url="viz3.html?query="+foo;
+	var url="viz3.html?"+foo;
 	window.open(url);
-}
-function runScript(e) {
-    if (e.keyCode == 13) {
-        commitSearch();
-    }
 }
 </script>
 
@@ -47,7 +42,7 @@ function runScript(e) {
 
       <div class="row">
         <div class="large-6 columns">
-          <p style="text-align:center;" onclick="runScript(event);"><a href="#" class="large button">Show the web</a></p>
+          <p style="text-align:center;" onclick="commitSearch();"><a href="#" class="large button">Show the web</a></p>
         </div>
       </div>
 		</div>

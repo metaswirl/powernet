@@ -1,0 +1,32 @@
+{
+  "nodes":[
+    {"name":"Kim Yong Un","group":1,"text":"hello World!"},
+    {"name":"Kim A","group":1},
+    {"name":"Kim B","group":1},
+    {"name":"Kim C","group":1},
+    {"name":"Kim D","group":1},
+    {"name":"KIM E","group":1},
+    {"name":"KIM F","group":1},
+    {"name":"KIM G","group":1},
+    {"name":"KIM H","group":1},
+    {"name":"KIM I","group":1},
+    {"name":"KIM J","group":2},
+    {"name":"KIM K","group":2},
+    {"name":"KIM L","group":3}
+  ],
+  "links":[
+    {"source":1,"target":0,"value":1},
+    {"source":2,"target":0,"value":8},
+    {"source":3,"target":0,"value":0},
+    {"source":3,"target":2,"value":6},
+    {"source":4,"target":0,"value":1},
+    {"source":5,"target":0,"value":1},
+    {"source":6,"target":0,"value":1},
+    {"source":7,"target":0,"value":1},
+    {"source":8,"target":0,"value":2},
+    {"source":9,"target":0,"value":1},
+    {"source":11,"target":10,"value":1},
+    {"source":11,"target":0,"value":5},
+    {"source":12,"target":11,"value":1}
+  ]
+}

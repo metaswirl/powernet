@@ -10,21 +10,10 @@
   <link rel="stylesheet" href="css/normalize.css" />
   
   <link rel="stylesheet" href="css/foundation.css" />
-  
+  <link rel="shortcut icon" href="img/littleMan.ico"/>  
 
   <script src="js/vendor/custom.modernizr.js"></script>
- <script>
-function commitSearch(){
-	var foo = $("[name='foo']").val();
-	var url="viz3.html?query="+foo;
-	window.open(url);
-}
-function runScript(e) {
-    if (e.keyCode == 13) {
-        commitSearch();
-    }
-}
-</script>
+
 
 </head>
 <body>
@@ -41,13 +30,13 @@ function runScript(e) {
 			<!-- Grid Example -->
 			<div class="row">
 				<div class="large-12 columns">
-					<input onkeypress="return commitSearch()" name="foo" type="text" placeholder="e.g. your political leader">
+					<input type="text" placeholder="e.g. your political leader">
 				</div>
 			</div>
 
       <div class="row">
         <div class="large-6 columns">
-          <p style="text-align:center;" onclick="runScript(event);"><a href="#" class="large button">Show the web</a></p>
+          <p style="text-align:center;"><a href="#" class="large button">Show the web</a></p>
         </div>
       </div>
 		</div>
