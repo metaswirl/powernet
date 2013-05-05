@@ -45,40 +45,6 @@ margin-top:50px;
 <body>
 <script>
 
-var width = 800,
-    height = 500
-
-var svg = d3.select("body").append("svg:svg")
-    .attr("width", width)
-    .attr("height", height);
-
-var force = d3.layout.force()
-    .gravity(.05)
-    .distance(170)
-    .charge(-170)
-    .size([width, height]);
-
-d3.select("body").append("div")
-      	.attr("class", "textcontent")
-	.attr("id","teco");
-
-document.getElementById('teco').innerHTML="<img src=\"template/img/logo.png\" style=\"width:300px\">";
-
-/*function deleteRect(){
-svg.selectAll(svg.rect).remove();
-}
-
-
-
-function renderRect(d){
-	deleteRect();
-	svg.append("svg:rect")
-	.attr("x", -8)
-      	.attr("y", -20)
-      	.attr("width", 40)
-      	.attr("height", 40);
-}*/
-
 function renderDiv(d){
 	 deleteDiv();
 
@@ -115,6 +81,33 @@ function deleteDiv(d){
 
 	document.getElementById('hi').innerHTML="";
 }
+
+
+var width = 800,
+    height = 500
+
+var svg = d3.select("body").append("svg:svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var force = d3.layout.force()
+    .gravity(.05)
+    .distance(170)
+    .charge(-170)
+    .size([width, height]);
+
+d3.select("body").append("div")
+      	.attr("class", "textcontent")
+	.attr("id","teco");
+
+document.getElementById('teco').innerHTML="<img src=\"template/img/logo.png\" style=\"width:300px\">";
+
+
+
+   var ws;
+    // TODO: instead of localhost = window.location.hostname
+    ws = new WebSocket("ws://localhost:8080/ws");
+    ws.onmessage = function(evt) {
 
 
 d3.json("fifth_dump", function(json) {
@@ -170,6 +163,8 @@ node.on("click",function(d){renderDiv(d);});
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
   });
 });
+
+};
 
 </script>
 
