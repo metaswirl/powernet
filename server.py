@@ -7,7 +7,7 @@ conn, addr = sock.accept()
 
 print 'connected:', addr
 
-data = conn.recv(1024)
+data = conn.recv(2048)
 
 #peterfunction(data, sock)
 conn.close()
