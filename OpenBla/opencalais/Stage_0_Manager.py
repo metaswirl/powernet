@@ -43,7 +43,8 @@ def remove_stop_words(exacts):
     return unique(exactArrs)
 
 def send(fact_array,signal_socket):
-    json.dumps(map(lambda fact:fact.pairs,fact_array))
+    json_dump = json.dumps(map(lambda fact:fact.pairs,fact_array))
+    signal_socket.send(json_dump)
 
 
 def unique(seq):
@@ -112,6 +113,7 @@ def process(focus,signal_socket):
         print "new: %d\nold: %d" %(len(new_queries),len(old_topQueries))
         print "fact Count: " + str(allFacts)
         queries = old_topQueries+new_queries
+    signal_socket.close()
         
 def main(eingabe,signal_socket):
     fact = Fact.Fact()
