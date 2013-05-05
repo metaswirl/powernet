@@ -8,11 +8,8 @@ import re
 import socket
 import tornado
 import tornado.websocket as websocket
-from tornado.netutil import TCPServer
 from collections import defaultdict
 from tornado import web, ioloop, httpserver
-
-#class tcpserv(TCPServer):
 
 class MyWebSocketHandler(websocket.WebSocketHandler):
     def allow_draft76(self):
