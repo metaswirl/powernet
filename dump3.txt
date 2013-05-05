@@ -2461,4 +2461,3 @@
 {"status": "current", "careertype": "political", "typeGroup": "relations", "position_name": "Chancellor", "person_name": "Gerhard Schroder", "type": "PersonCareer", "person_nationality": "N/A"}
 {"status": "future", "person_name": "Nixon", "locationdestination_name": "China", "typeGroup": "relations", "type": "PersonTravel", "person_nationality": "N/A"}
 {"status": "current", "careertype": "professional", "typeGroup": "relations", "company_name": "Volkswagen", "company_nationality": "N/A", "person_name": "Peter Hartz", "type": "PersonCareer", "person_nationality": "N/A"}
-{"status": "current", "careertype":
