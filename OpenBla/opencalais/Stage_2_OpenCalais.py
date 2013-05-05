@@ -42,7 +42,7 @@ def getFactsAndIncidents(url):
 
 def processURLsForFactsAndFindings(urls):
     
-    print "got %d urls for openCalais.." %(len(urls))
+#     print "got %d urls for openCalais.." %(len(urls))
     
     pool = Pool(5)
     factFindingArray = pool.map(getFactsAndIncidents,urls)

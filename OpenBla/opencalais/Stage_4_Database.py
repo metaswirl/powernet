@@ -34,9 +34,9 @@ class SQLAccess:
         return my_dict
         
     def save_qfmeasures(self, query_fmeasures, focus):
-        print "insert queryscores"
+#         print "insert queryscores"
         for key in query_fmeasures:
-            print "insert key: " + key
+#             print "insert key: " + key
             self.cur.execute("SELECT query_insert(%s)", (key,))
             self.cur.execute("SELECT id FROM query WHERE value=%s", (key,))
             query_id = self.cur.fetchall()[0][0]
@@ -49,7 +49,7 @@ class SQLAccess:
         self.conn.commit() 
 
     def save_urlscores(self, urlscores, focus):
-        print "insert urlscores"
+#         print "insert urlscores"
         for key in urlscores:
             self.cur.execute("SELECT url_insert(%s);", (key,))
             self.cur.execute("SELECT id FROM urls WHERE url=%s", (key,))
@@ -63,7 +63,7 @@ class SQLAccess:
         self.conn.commit()
 
     def facts_insert(self, facts):
-        print "insert facts: " + str(len(facts))
+#         print "insert facts: " + str(len(facts))
 #         keys = fact.pairs.keys()
 #         values = fact.pairs.values()
 #         print str(len(keys)) + ":" + str(len(values))

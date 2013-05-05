@@ -5,12 +5,9 @@ import Stage_4_Database as Stage4
 
 if __name__=="__main__":
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    try:
-        sock.bind(('localhost', 7080))
-        sock.listen(1)
-        conn, addr = sock.accept()
-    except:
-        print "foobar server"
+    sock.bind(('localhost', 7080))
+    sock.listen(1)
+    conn, addr = sock.accept()
     
     print 'connected:', addr
     

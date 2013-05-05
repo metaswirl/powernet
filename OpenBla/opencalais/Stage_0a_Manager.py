@@ -21,7 +21,7 @@ def getFocusQueries(focus):
 stop_words=["","a","an","of","the","in","at","and","or",
             "by","not","he","she","is","of","his","her"]
 def remove_stop_words(exacts):
-    print "vorher: %d" %(len(exacts))
+#     print "vorher: %d" %(len(exacts))
     exactArrs=[]
     
     for exact in exacts:
@@ -38,14 +38,14 @@ def remove_stop_words(exacts):
             if stop in exactArr:
                 exactArr.remove(stop)
         exactArrs.append(" ".join(exactArr))
-    print "eigentlich: " + str(unique(exactArrs))
-    print "nachher: %d" %(len(exactArrs))
+#     print "eigentlich: " + str(unique(exactArrs))
+#     print "nachher: %d" %(len(exactArrs))
     return unique(exactArrs)
 
 def send(fact_arr,signal_socket):
     
     json_dump = json.dumps(map(lambda fact:fact.pairs,fact_arr))
-    print "to send: " + json_dump
+#     print "to send: " + json_dump
     signal_socket.send(json_dump)
 
 
@@ -59,7 +59,7 @@ def process(eingabe,focus,signal_socket):
     allFacts = 0
     queries = getFocusQueries(focus)
     while (allFacts < 2500):
-        print "Big Round with %d queries" %(len(queries),) 
+#         print "Big Round with %d queries" %(len(queries),) 
         query_urls_pairs = Stage_1_QueryToURLs.processQueries(queries)
         query_fmeasures = {}
         url_fmeasures = {}
@@ -89,13 +89,16 @@ def process(eingabe,focus,signal_socket):
         for url in url_fmeasures.keys():
             fmeasures = url_fmeasures[url]
             url_scores[url] = sum(fmeasures)
-            
+        
         sqldings = Stage4.SQLAccess()
         for fact_arr in url_facts_outerloop.values():
             sqldings.facts_insert(map(lambda fact:(fact.pairs.keys(),fact.pairs.values()), fact_arr))
             allFacts+=len(fact_arr)
+#             print fact_arr
             if signal_socket != None:
                 send(fact_arr,signal_socket)
+            for fact in fact_arr:
+                print fact.toJson()
         sqldings.save_qfmeasures(query_fmeasures, focus)
         sqldings.save_urlscores(url_scores, focus)
         sqldings.close()
@@ -113,8 +116,8 @@ def process(eingabe,focus,signal_socket):
         new_queries = remove_stop_words(simpleTexts)
         
         old_topQueries = sorted(queries,key=lambda query:query_fmeasures[query])[0:1]
-        print "new: %d\nold: %d" %(len(new_queries),len(old_topQueries))
-        print "fact Count: " + str(allFacts)
+#         print "new: %d\nold: %d" %(len(new_queries),len(old_topQueries))
+#         print "fact Count: " + str(allFacts)
         queries = old_topQueries+new_queries
         
 def main(eingabe,signal_socket):
@@ -125,4 +128,4 @@ def main(eingabe,signal_socket):
     process(eingabe,fact,signal_socket)
 
 if __name__ == '__main__':
-    main("lol",None)
+    main("Kim Jong Un",None)

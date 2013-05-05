@@ -7,7 +7,7 @@ URL2 = "%27&Market=%27en-US%27&$top=50&$format=JSON"
 def geturls(query):
     
     urls=[]
-    print "query: "+str(query)
+#     print "query: "+str(query)
     r=requests.get(URL1+query+URL2, auth=("", API_KEY),verify=False)
     for url in r.json()["d"]["results"]:
         urls.append(url["Url"])
