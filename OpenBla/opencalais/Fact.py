@@ -27,9 +27,17 @@ class Fact(object):
     
     def is_relevant(self,focus):
         for key in focus.pairs.keys():
-            if not self.pairs.has_key(key):
+            if key=='*':
+                specialVal = focus.pairs['*']
+                c = 0
+                for selfkey in self.pairs.keys():
+                    if self.pairs[selfkey]==specialVal:
+                        c+=1
+                if c==0:
+                    return False
+            elif not self.pairs.has_key(key):
                 return False
-            if focus.pairs[key] != self.pairs[key]:
+            elif focus.pairs[key] != self.pairs[key]:
                 return False;
         return True;
     

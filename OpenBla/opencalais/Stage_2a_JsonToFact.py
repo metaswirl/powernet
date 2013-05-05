@@ -9,6 +9,7 @@ import Fact
 
 def openCalaisJsonToFacts(jsonObject,typeGroup):
     facts = []
+    exacts = []
     for relation in jsonObject:
 #             print relation['_type']
         currentAttribute = Fact.Fact()
@@ -23,8 +24,12 @@ def openCalaisJsonToFacts(jsonObject,typeGroup):
                     for dict_key in ['name','nationality']:
                         if v.has_key(dict_key):
                             currentAttribute.add(str(k)+"_"+dict_key,v[dict_key])
+                elif k=='instances':
+                    for instance in v:
+                        if instance.has_key("exact"):
+                            exacts.append(instance["exact"])
         facts.append(currentAttribute)
-    return facts
+    return [facts,exacts]
 
             
         
