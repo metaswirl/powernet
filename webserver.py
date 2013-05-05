@@ -5,6 +5,7 @@ Author: Niklas Semmler
 '''
 import sys
 import re
+import socket
 import tornado
 import tornado.websocket as websocket
 from tornado.netutil import TCPServer
@@ -32,7 +33,10 @@ class MyWebSocketHandler(websocket.WebSocketHandler):
         self.application.socket_listener.remove(self)
 
 class MyRequestHandler(web.RequestHandler):
+    def initialize(self, sock):
+        self.sock=sock
     def get(self):
+        #self.sock.send(self.get_argument('query'))
         self.render("www/viz3.html")
 
 class ParseFacts(object):
@@ -154,6 +158,12 @@ def parse_file():
 
     return entries
 
+#def wait_for_msg(listener_set, sock):
+#    while True:
+#        stuff = sock.recv(2048)
+#        for listen in listener_set:
+#            print stuff
+#            listen.write_message(stuff)
 
 def main():
     settings = {
@@ -161,15 +171,29 @@ def main():
         'debug': False,
     }
 
+    sock = None
+    #try:
+    #    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    #    sock.connect(("localhost", 5000))
+    #except socket.error:
+    #    print "could not connect to port" 
+    #    raise
+
     application = web.Application([
         (r'/ws', MyWebSocketHandler),
-        ("/viz3.html", MyRequestHandler, ),
+        ("/viz3.html", MyRequestHandler, {"sock":sock}),
         ("/(.*)", web.StaticFileHandler, {"path":settings['static_path'], "default_filename":"index.html"} ),
         ], **settings)
 
     application.socket_listener = set() 
 
+    #import threading
+    #from threading import Thread
+    #t = Thread(target=wait_for_msg, args=(application.socket_listener, sock))
+    #t.daemon = True
+
     io_loop = ioloop.IOLoop.instance()
+    #io_loop.add_handler(sock.fileno(), handle_event, ioloop.IOLoop.READ )
 
     application.listen(8080)
     io_loop.start()
