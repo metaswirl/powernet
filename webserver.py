@@ -76,7 +76,7 @@ class ParseFacts(object):
                     fact["name"] = fact[name] 
                     del(fact[name])
                     fact["group"] = group
-                    entities[self._get_id(fact["name"], ids, counter)].update(fact)
+                    entities[fact["name"]].update(fact)
 
     def _is_relation(self, fact, ids, counter, entities):
         """
@@ -130,11 +130,17 @@ class ParseFacts(object):
             self._is_relevant(fact, entities, relations, ids, counter)
 
         relations = {v['source']:v for v in relations}.values()
-        entities2 = [] 
+        entities2 = {}
         for k,v in entities.items():
-            entities2.append(format_fact(v))
+            if ids.has_key(k):
+                entities2[ids[k]] = v
+
+        entities3 = []
+
+        for k,v in entities.items():
+            entities3.append(format_fact(v))
             
-        return {"nodes":entities2, "links":relations}
+        return {"nodes":entities3, "links":relations}
 
 def parse_file():
     """ parse file if no direct content is available """
@@ -146,7 +152,7 @@ def parse_file():
 
     entries = []
 
-    with open("json_example2.txt", "rb") as f:
+    with open("dump4.txt", "rb") as f:
         for line in f:
             line = line.translate(None, '\n}{')
             if line:
