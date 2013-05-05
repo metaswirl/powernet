@@ -14,7 +14,7 @@ from random import randint
 
 
 def getFocusQueries(focus):
-    return [" ".join(focus.pairs.values())]
+    return [" ".join(focus.pairs.values())]+["North Korea leader","Party Kim Jong","Kim Jong Un USA"]
 
     
     
@@ -56,6 +56,7 @@ def unique(seq):
 
 
 def process(eingabe,focus,signal_socket):
+    file=open("la.txt","w")
     allFacts = 0
     queries = getFocusQueries(focus)
     while (allFacts < 2500):
@@ -98,6 +99,8 @@ def process(eingabe,focus,signal_socket):
             if signal_socket != None:
                 send(fact_arr,signal_socket)
             for fact in fact_arr:
+                file.write(fact.toJson())
+                file.write("\n")
                 print fact.toJson()
         sqldings.save_qfmeasures(query_fmeasures, focus)
         sqldings.save_urlscores(url_scores, focus)
@@ -119,6 +122,7 @@ def process(eingabe,focus,signal_socket):
 #         print "new: %d\nold: %d" %(len(new_queries),len(old_topQueries))
 #         print "fact Count: " + str(allFacts)
         queries = old_topQueries+new_queries
+    file.close()
         
 def main(eingabe,signal_socket):
     fact = Fact.Fact()

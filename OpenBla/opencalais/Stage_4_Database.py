@@ -71,4 +71,5 @@ class SQLAccess:
 #         self.cur.execute("SELECT facts_insert(%s, %s)", (keys, values))
         self.conn.commit()
         
+        
     
