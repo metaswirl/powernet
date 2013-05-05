@@ -24,9 +24,9 @@ class SQLAccess:
             for key in element[1]:
                 if "name" in key and text in element[2][element[1].index(key)]:
                     fact_list.append(self.makedict(element[1], element[2]))
-        #fact_list+="hier wird peter aufgerufen"
+        if len(fact_list)=0:
+            #fact_list+="hier wird peter aufgerufen"
         return fact_list
-        #self.conn.commit()
 
     def makedict(self, keys, values):
         my_dict={}
