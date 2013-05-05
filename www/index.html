@@ -13,6 +13,13 @@
   
 
   <script src="js/vendor/custom.modernizr.js"></script>
+ <script>
+function commitSearch(){
+	var foo = $("[name='foo']").val();
+	var url="viz3.html?"+foo;
+	window.open(url);
+}
+</script>
 
 </head>
 <body>
@@ -29,13 +36,13 @@
 			<!-- Grid Example -->
 			<div class="row">
 				<div class="large-12 columns">
-					<input type="text" placeholder="e.g. your political leader">
+					<input name="foo" type="text" placeholder="e.g. your political leader">
 				</div>
 			</div>
 
       <div class="row">
         <div class="large-6 columns">
-          <p style="text-align:center;"><a href="#" class="large button">Show the web</a></p>
+          <p style="text-align:center;" onclick="commitSearch();"><a href="#" class="large button">Show the web</a></p>
         </div>
       </div>
 		</div>
